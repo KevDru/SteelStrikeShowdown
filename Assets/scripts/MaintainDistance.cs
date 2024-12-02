@@ -27,6 +27,8 @@ public class MaintainDistance : MonoBehaviour
     {
         if (player != null)
         {
+            transform.LookAt(player);
+
             // Calculate the vector between the enemy and the player
             Vector3 direction = transform.position - player.position;
             float currentDistance = direction.magnitude;
