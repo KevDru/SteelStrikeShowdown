@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTag: Player
   desiredDistance: 1
-  moveSpeed: 7
+  moveSpeed: 200
   stopThreshold: 0.01
 --- !u!54 &1962603395
 Rigidbody:
