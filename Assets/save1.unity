@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 1166257603}
   - component: {fileID: 1166257602}
   - component: {fileID: 1166257601}
+  - component: {fileID: 1166257605}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -470,6 +471,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1201658348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1166257605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166257600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e7535d678135354c88bfd3a14cf322e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1201658346}
+  playerCamera: {fileID: 1166257603}
+  enemy: {fileID: 0}
+  enemyTag: Enemy
+  speed: 5
+  lookSpeed: 2
+  sensitivity: 2
+  rotationSpeed: 5
 --- !u!1 &1201658344 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6393974813386716368, guid: 459f79a004eb51144840e79b6950c697,
@@ -559,9 +580,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1201658346}
   playerCamera: {fileID: 1166257603}
+  enemy: {fileID: 0}
+  enemyTag: Enemy
   speed: 5
   lookSpeed: 2
   sensitivity: 2
+  rotationSpeed: 5
 --- !u!95 &1201658351 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 364802905602536464, guid: 459f79a004eb51144840e79b6950c697,
@@ -789,7 +813,7 @@ PrefabInstance:
     - target: {fileID: 6048376750277521002, guid: 459f79a004eb51144840e79b6950c697,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.33
       objectReference: {fileID: 0}
     - target: {fileID: 6048376750277521002, guid: 459f79a004eb51144840e79b6950c697,
         type: 3}
@@ -997,10 +1021,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5577523211745084723, guid: 459f79a004eb51144840e79b6950c697,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5577523211745084723, guid: 459f79a004eb51144840e79b6950c697,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.65
+      objectReference: {fileID: 0}
     - target: {fileID: 6048376750277521002, guid: 459f79a004eb51144840e79b6950c697,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0000015482846
+      value: 2.03
       objectReference: {fileID: 0}
     - target: {fileID: 6048376750277521002, guid: 459f79a004eb51144840e79b6950c697,
         type: 3}
@@ -1010,7 +1044,7 @@ PrefabInstance:
     - target: {fileID: 6048376750277521002, guid: 459f79a004eb51144840e79b6950c697,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.57
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6048376750277521002, guid: 459f79a004eb51144840e79b6950c697,
         type: 3}
@@ -1069,6 +1103,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1962603394}
+    - targetCorrespondingSourceObject: {fileID: 6393974813386716368, guid: 459f79a004eb51144840e79b6950c697,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1962603395}
   m_SourcePrefab: {fileID: 100100000, guid: 459f79a004eb51144840e79b6950c697, type: 3}
 --- !u!1 &1962603390 stripped
 GameObject:
@@ -1111,9 +1149,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTag: Player
-  desiredDistance: 2
+  desiredDistance: 1
   moveSpeed: 5
   stopThreshold: 0.1
+--- !u!54 &1962603395
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962603390}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 108
+  m_CollisionDetection: 0
 --- !u!1 &2142734091
 GameObject:
   m_ObjectHideFlags: 0
