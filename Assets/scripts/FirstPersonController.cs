@@ -64,7 +64,6 @@ public class FirstPersonController : MonoBehaviour
             Vector3 directionToEnemy = enemy.position - transform.position;
             directionToEnemy.y = 0; // Ignore vertical axis for camera rotation
 
-            // Smoothly rotate towards the enemy
             Quaternion targetRotation = Quaternion.LookRotation(directionToEnemy);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             Debug.DrawLine(transform.position, enemy.position, Color.red);
