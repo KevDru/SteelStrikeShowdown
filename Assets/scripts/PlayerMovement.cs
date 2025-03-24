@@ -2,32 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController controller; // Referentie naar de CharacterController
-    public Animator animator; // Referentie naar de Animator
-    public float speed = 5f; // Snelheid van de speler
+    public Camera playerCamera;
+    public float walkSpeed = 6f;
+    public float runSpeed = 12f;
+    public float gravity = 10f;
+    public float lookSpeed = 2f;
+    public float lookXLimit = 45f;
+
+    private Vector3 moveDirection = Vector3.zero;
+    private float rotationX = 0;
+    private CharacterController characterController;
+
+    private bool canMove = true;
+
+    void Start()
+    {
+        characterController = GetComponent<CharacterController>();
+      
+    }
 
     void Update()
     {
-        // Verkrijg input van de speler
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        Vector3 right = transform.TransformDirection(Vector3.right);
 
-        // Maak een vector voor de beweging
-        Vector3 move = transform.right * horizontal + transform.forward * vertical;
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
+        float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
+        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        // Beweeg de CharacterController
-        controller.Move(move * speed * Time.deltaTime);
-
-        // Update de animator
-        if (move.magnitude > 0)
+        if (!characterController.isGrounded)
         {
-            animator.SetBool("isWalking", true); // Loop animatie
+            moveDirection.y -= gravity * Time.deltaTime;
         }
-        else
+
+        characterController.Move(moveDirection * Time.deltaTime);
+
+        if (canMove)
         {
-            animator.SetBool("isWalking", false); // Idle animatie
+            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
     }
 }
