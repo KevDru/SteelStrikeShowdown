@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = 10f;
     public float lookSpeed = 2f;
     public float lookXLimit = 45f;
-    public float lockOnRadius = 10f; // Radius to detect enemies
+    public float lockOnRadius = 1000; // Radius to detect enemies
     public Transform lockOnTarget = null; // Current locked-on enemy
 
     private Vector3 moveDirection = Vector3.zero;
@@ -80,14 +80,14 @@ public class PlayerMovement : MonoBehaviour
 
     Transform FindClosestEnemy()
     {
-        Collider[] enemies = Physics.OverlapSphere(transform.position, lockOnRadius, LayerMask.GetMask("Enemy"));
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); // Find all objects with "Enemy" tag
         Transform closest = null;
         float minDistance = Mathf.Infinity;
 
-        foreach (Collider enemy in enemies)
+        foreach (GameObject enemy in enemies)
         {
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distance < minDistance)
+            if (distance < minDistance && distance <= lockOnRadius) // Check if within lock-on range
             {
                 minDistance = distance;
                 closest = enemy.transform;
@@ -95,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
         }
         return closest;
     }
+
 
     void LockOntoTarget()
     {
