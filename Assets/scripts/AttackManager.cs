@@ -22,11 +22,11 @@ public class AttackManager : MonoBehaviour
     {
         if (Input.GetAxis("Mouse X") < 0 && Input.GetAxis("Mouse Y") < 0.15f && Input.GetAxis("Mouse Y") > -0.15f)
         {
-            playerAnimator.SetTrigger("AttackRight");
+            playerAnimator.SetTrigger("AttackLeft");
         }
         else if (Input.GetAxis("Mouse X") > 0 && Input.GetAxis("Mouse Y") < 0.15f && Input.GetAxis("Mouse Y") > -0.15f)
         {
-            playerAnimator.SetTrigger("AttackLeft");
+            playerAnimator.SetTrigger("AttackRight");
         }
         else if (Input.GetAxis("Mouse Y") > 0 && Input.GetAxis("Mouse X") < 0.15f && Input.GetAxis("Mouse X") > -0.15f)
         {
