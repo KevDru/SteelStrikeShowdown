@@ -1,40 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class AttackManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Animator playerAnimator;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            DirectionCheck();
+            HandleAction("Attack");
         }
-
+        if (Input.GetMouseButtonDown(1))
+        {
+            HandleAction("Defend");
+        }
     }
 
-    void DirectionCheck()
+    void HandleAction(string actionType)
     {
-        if (Input.GetAxis("Mouse X") < 0 && Input.GetAxis("Mouse Y") < 0.15f && Input.GetAxis("Mouse Y") > -0.15f)
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        if (mouseX < 0 && Mathf.Abs(mouseY) < 0.15f)
         {
-            playerAnimator.SetTrigger("AttackLeft");
+            playerAnimator.SetTrigger($"{actionType}Left");
         }
-        else if (Input.GetAxis("Mouse X") > 0 && Input.GetAxis("Mouse Y") < 0.15f && Input.GetAxis("Mouse Y") > -0.15f)
+        else if (mouseX > 0 && Mathf.Abs(mouseY) < 0.15f)
         {
-            playerAnimator.SetTrigger("AttackRight");
+            playerAnimator.SetTrigger($"{actionType}Right");
         }
-        else if (Input.GetAxis("Mouse Y") > 0 && Input.GetAxis("Mouse X") < 0.15f && Input.GetAxis("Mouse X") > -0.15f)
+        else if (mouseY > 0 && Mathf.Abs(mouseX) < 0.15f)
         {
-            playerAnimator.SetTrigger("AttackUp");
+            playerAnimator.SetTrigger($"{actionType}Up");
         }
-        else if (Input.GetAxis("Mouse Y") < 0 && Input.GetAxis("Mouse X") < 0.15f && Input.GetAxis("Mouse X") > -0.15f)
+        else if (mouseY < 0 && Mathf.Abs(mouseX) < 0.15f)
         {
-            playerAnimator.SetTrigger("AttackDown");
+            playerAnimator.SetTrigger($"{actionType}Down");
         }
     }
 }
