@@ -11,6 +11,8 @@ public class PauseMenuScript : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -33,18 +35,22 @@ public class PauseMenuScript : MonoBehaviour
         PauseMenuCanvas.SetActive(true);
         Time.timeScale = 0f;
         Paused = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void Play()
     {
         PauseMenuCanvas.SetActive(false);
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
         Paused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void MainMenuButton()
     {
-        Time.timeScale = 1f; 
-        SceneManager.LoadScene("Main Menu"); 
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Main Menu");
     }
 }
