@@ -742,6 +742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startCamera: {fileID: 0}
   allCameras: []
+  crosshairUI: {fileID: 0}
 --- !u!4 &992482567
 Transform:
   m_ObjectHideFlags: 0
