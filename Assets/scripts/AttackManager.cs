@@ -11,7 +11,6 @@ public class AttackManager : MonoBehaviour
     public int attackDamage = 1;
     public LayerMask attackLayer;
 
-
     bool attacking = false;
     bool readyToAttack = true;
     int attackCount;
