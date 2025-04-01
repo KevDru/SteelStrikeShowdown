@@ -26,15 +26,24 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        HandleMovement();
-        HandleLockOn();
+        if (!PauseMenuScript.Paused)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            HandleMovement();
+            HandleLockOn();
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     void HandleMovement()
     {
+        if (PauseMenuScript.Paused) return;
+
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
@@ -65,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleLockOn()
     {
+        if (PauseMenuScript.Paused) return;
+
         if (Input.GetKeyDown(KeyCode.Q)) // Press Q to toggle lock-on
         {
             if (lockOnTarget == null)
@@ -96,9 +107,10 @@ public class PlayerMovement : MonoBehaviour
         return closest;
     }
 
-
     void LockOntoTarget()
     {
+        if (PauseMenuScript.Paused) return;
+
         if (lockOnTarget != null)
         {
             Vector3 direction = lockOnTarget.position - transform.position;
