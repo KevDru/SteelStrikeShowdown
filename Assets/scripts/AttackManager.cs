@@ -5,11 +5,7 @@ using UnityEngine;
 
 public class AttackManager : MonoBehaviour
 {
-<<<<<<< Updated upstream
-    // Start is called before the first frame update
-=======
     public Camera PlayerCamera;  
->>>>>>> Stashed changes
     public Animator playerAnimator;
     public float attackDistance = 3f;
     public float attackDelay = 0.4f;
@@ -31,11 +27,6 @@ public class AttackManager : MonoBehaviour
 
     }
 
-<<<<<<< Updated upstream
-    void DirectionCheck()
-    {
-        if (Input.GetAxis("Mouse X") < 0 && Input.GetAxis("Mouse Y") < 0.15f && Input.GetAxis("Mouse Y") > -0.15f)
-=======
     void ResetAttack()
     {
         attacking = false;
@@ -81,7 +72,6 @@ public class AttackManager : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y");
 
         if (mouseX < 0 && Mathf.Abs(mouseY) < 0.15f)
->>>>>>> Stashed changes
         {
             playerAnimator.SetTrigger("AttackLeft");
         }
